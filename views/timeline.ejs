@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>السجل - Nitaq</title>
+
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+<video class="video-bg" autoplay muted loop playsinline>
+    <source src="/video/background.mp4" type="video/mp4">
+</video>
+
+<nav class="navbar">
+    <div class="logo">Nitaq</div>
+    <div class="nav-links">
+        <a href="/dashboard">لوحة التحكم</a>
+        <a href="/">تحقق جديد</a>
+    </div>
+    <button class="nav-btn" onclick="window.location.href='/logout'">
+        تسجيل الخروج
+    </button>
+</nav>
+
+<section class="dash-container">
+
+    <h1 style="margin-bottom:40px;">📜 سجل العمليات</h1>
+
+    <% if (requests.length === 0) { %>
+        <p style="opacity:0.6;">لا توجد عمليات حتى الآن</p>
+    <% } else { %>
+
+    <div class="timeline-list">
+        <% requests.slice().reverse().forEach(req => { %>
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <strong><%= req.entity %></strong>
+                    <span><%= req.time %></span>
+                </div>
+                <p>البيانات: <%= req.data %></p>
+                <div class="timeline-result"><%= req.result %></div>
+            </div>
+        <% }) %>
+    </div>
+
+    <% } %>
+
+</section>
+
+</body>
+</html>
